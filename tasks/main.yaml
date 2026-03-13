@@ -84,6 +84,16 @@
   when: networkd_config.bridges is defined
   notify: Restart systemd-networkd
 
+- name: Generate .netdev files for dummy interfaces
+  become: true
+  ansible.builtin.template:
+    src: netdev.dummy.j2
+    dest: "/etc/systemd/network/30-{{ item.key }}.netdev"
+    mode: "0644"
+  loop: "{{ networkd_config.dummy | default({}) | dict2items }}"
+  when: networkd_config.dummy is defined
+  notify: Restart systemd-networkd
+
 - name: Generate .network files for all interfaces
   become: true
   ansible.builtin.template:
