@@ -129,6 +129,8 @@ Scope={{ route.scope }}
 {% elif route.Scope is defined %}
 Scope={{ route.Scope }}
 {% endif %}
+{% endfor %}
+{% endif %}
 {# Routing policy rule section for multipler routing tables #}
 {% if item.value.RoutingPolicyRule is defined %}
 {% for rule in item.value.RoutingPolicyRule %}
