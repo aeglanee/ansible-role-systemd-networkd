@@ -51,8 +51,7 @@
   loop: "{{ networkd_config.links | default({}) | dict2items }}"
   when: networkd_config.links is defined
   notify:
-    - Reload systemd-networkd
-    - Trigger udev to apply link file renames
+    - Apply networkd changes
 
 - name: Generate .netdev files for VLANs (required for VLAN= syntax in bridge network file)
   become: true
@@ -62,7 +61,7 @@
     mode: "0644"
   loop: "{{ networkd_config.vlans | default({}) | dict2items }}"
   when: networkd_config.vlans is defined
-  notify: Restart systemd-networkd
+  notify: Apply networkd changes
 
 - name: Generate .netdev files for bonds
   become: true
@@ -72,7 +71,7 @@
     mode: "0644"
   loop: "{{ networkd_config.bonds | default({}) | dict2items }}"
   when: networkd_config.bonds is defined
-  notify: Restart systemd-networkd
+  notify: Apply networkd changes
 
 - name: Generate .netdev files for bridges
   become: true
@@ -82,7 +81,7 @@
     mode: "0644"
   loop: "{{ networkd_config.bridges | default({}) | dict2items }}"
   when: networkd_config.bridges is defined
-  notify: Restart systemd-networkd
+  notify: Apply networkd changes
 
 - name: Generate .netdev files for dummy interfaces
   become: true
@@ -92,7 +91,7 @@
     mode: "0644"
   loop: "{{ networkd_config.dummy | default({}) | dict2items }}"
   when: networkd_config.dummy is defined
-  notify: Restart systemd-networkd
+  notify: Apply networkd changes
 
 - name: Generate .network files for all interfaces
   become: true
@@ -102,7 +101,7 @@
     mode: "0644"
   loop: "{{ networkd_config.networks | default({}) | dict2items }}"
   when: networkd_config.networks is defined
-  notify: Restart systemd-networkd
+  notify: Apply networkd changes
 
 - name: Configure loopback interface
   become: true
@@ -115,4 +114,4 @@
       key: lo
       value: "{{ networkd_config.loopback | default({}) }}"
   when: networkd_config.loopback is defined
-  notify: Reload systemd-networkd
+  notify: Apply networkd changes
