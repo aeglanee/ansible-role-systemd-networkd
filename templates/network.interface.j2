@@ -118,22 +118,42 @@ Gateway={{ route.via }}
 {% elif route.Gateway is defined %}
 Gateway={{ route.Gateway }}
 {% endif %}
-{# OnLink removed for compatibility with older systemd versions #}
+{% if route.table is defined %}
+Table={{ route.table }}
+{% elif route.Table is defined %}
+Table={{ route.Table }}
+{% endif %}
+{% if route.scope is defined %}
+Scope={{ route.scope }}
+{% elif route.Scope is defined %}
+Scope={{ route.Scope }}
+{% endif %}
+{# Routing policy rule section for multipler routing tables #}
+{% if item.value.RoutingPolicyRule is defined %}
+{% for rule in item.value.RoutingPolicyRule %}
+[RoutingPolicyRule]
+{% if rule.from is defined %}
+From={{ rule.from }}
+{% elif rule.From is defined %}
+From={{ rule.From }}
+{% endif %}
+{% if rule.to is defined %}
+To={{ rule.to }}
+{% elif rule.To is defined %}
+To={{ rule.To }}
+{% endif %}
+{% if rule.table is defined %}
+Table={{ rule.table }}
+{% elif rule.Table is defined %}
+Table={{ rule.Table }}
+{% endif %}
+{% if rule.priority is defined %}
+Priority={{ rule.priority }}
+{% elif rule.Priority is defined %}
+Priority={{ rule.Priority }}
+{% endif %}
 {% endfor %}
 {% endif %}
-{% if item.value.Route is defined %}
-{% for route in item.value.Route %}
-[Route]
-{% if route.Destination is defined %}
-Destination={{ route.Destination }}
-{% endif %}
-{% if route.Gateway is defined %}
-Gateway={{ route.Gateway }}
-{% endif %}
-{# OnLink removed for compatibility with older systemd versions #}
-{% endfor %}
-{% endif %}
-
 {# BridgeVLAN sections for VLAN-aware bridges #}
 {% if item.value.BridgeVLAN is defined %}
 {% for vlan in item.value.BridgeVLAN %}
