@@ -129,10 +129,10 @@ Scope={{ route.scope }}
 {% elif route.Scope is defined %}
 Scope={{ route.Scope }}
 {% endif %}
-
 {# Routing policy rule section for multipler routing tables #}
 {% if item.value.RoutingPolicyRule is defined %}
 {% for rule in item.value.RoutingPolicyRule %}
+
 [RoutingPolicyRule]
 {% if rule.from is defined %}
 From={{ rule.from }}
@@ -159,6 +159,7 @@ Priority={{ rule.Priority }}
 {# BridgeVLAN sections for VLAN-aware bridges #}
 {% if item.value.BridgeVLAN is defined %}
 {% for vlan in item.value.BridgeVLAN %}
+
 [BridgeVLAN]
 {% if vlan.vlan is defined %}
 VLAN={{ vlan.vlan }}
