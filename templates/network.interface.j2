@@ -107,6 +107,7 @@ ConfigureWithoutCarrier={{ bool_to_yesno(item.value.ConfigureWithoutCarrier) }}
 {% endif %}
 {% if item.value.routes is defined %}
 {% for route in item.value.routes %}
+
 [Route]
 {% if route.to is defined %}
 Destination={{ route.to }}
@@ -128,6 +129,7 @@ Scope={{ route.scope }}
 {% elif route.Scope is defined %}
 Scope={{ route.Scope }}
 {% endif %}
+
 {# Routing policy rule section for multipler routing tables #}
 {% if item.value.RoutingPolicyRule is defined %}
 {% for rule in item.value.RoutingPolicyRule %}
