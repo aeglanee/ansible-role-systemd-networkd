@@ -105,8 +105,8 @@ Description={{ item.value.Description }}
 {% if item.value.ConfigureWithoutCarrier is defined %}
 ConfigureWithoutCarrier={{ bool_to_yesno(item.value.ConfigureWithoutCarrier) }}
 {% endif %}
-{% if item.value.routes is defined %}
-{% for route in item.value.routes %}
+{% if item.value.Routes is defined %}
+{% for route in item.value.Routes %}
 
 [Route]
 {% if route.to is defined %}
