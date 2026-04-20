@@ -129,6 +129,16 @@ Scope={{ route.scope }}
 {% elif route.Scope is defined %}
 Scope={{ route.Scope }}
 {% endif %}
+{% if route.type is defined %}
+Type={{ route.type }}
+{% elif route.Type is defined %}
+Type={{ route.Type }}
+{% endif %}
+{% if route.metric is defined %}
+Metric={{ route.metric }}
+{% elif route.Metric is defined %}
+Metric={{ route.Metric }}
+{% endif %}
 {% endfor %}
 {% endif %}
 {# Routing policy rule section for multipler routing tables #}
