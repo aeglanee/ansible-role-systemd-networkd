@@ -46,18 +46,6 @@ DHCPv6={{ bool_to_yesno(item.value.dhcp6) }}
 {% if item.value.DHCP is defined %}
 DHCP={{ item.value.DHCP | lower }}
 {% endif %}
-{% if item.value.DHCPv4 is defined %}
-[DHCPv4]
-{% if item.value.DHCPv4.UseRoutes is defined %}
-UseRoutes={{ bool_to_yesno(item.value.DHCPv4.UseRoutes) }}
-{% endif %}
-{% if item.value.DHCPv4.UseDNS is defined %}
-UseDNS={{ bool_to_yesno(item.value.DHCPv4.UseDNS) }}
-{% endif %}
-{% if item.value.DHCPv4.RouteMetric is defined %}
-RouteMetric={{ item.value.DHCPv4.RouteMetric }}
-{% endif %}
-{% endif %}
 {% if item.value.addresses is defined %}
 {% for address in item.value.addresses %}
 Address={{ address }}
@@ -104,6 +92,19 @@ Description={{ item.value.Description }}
 {% endif %}
 {% if item.value.ConfigureWithoutCarrier is defined %}
 ConfigureWithoutCarrier={{ bool_to_yesno(item.value.ConfigureWithoutCarrier) }}
+{% endif %}
+{% if item.value.DHCPv4 is defined %}
+
+[DHCPv4]
+{% if item.value.DHCPv4.UseRoutes is defined %}
+UseRoutes={{ bool_to_yesno(item.value.DHCPv4.UseRoutes) }}
+{% endif %}
+{% if item.value.DHCPv4.UseDNS is defined %}
+UseDNS={{ bool_to_yesno(item.value.DHCPv4.UseDNS) }}
+{% endif %}
+{% if item.value.DHCPv4.RouteMetric is defined %}
+RouteMetric={{ item.value.DHCPv4.RouteMetric }}
+{% endif %}
 {% endif %}
 {% if item.value.Routes is defined %}
 {% for route in item.value.Routes %}
